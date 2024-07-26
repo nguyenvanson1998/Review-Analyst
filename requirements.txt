@@ -1,0 +1,10 @@
+transformers
+datasets
+pandas
+unidecode
+emoji
+joblib
+langdetect
+torch
+accelerate
+scikit-learn

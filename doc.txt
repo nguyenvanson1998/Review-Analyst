@@ -1,0 +1,113 @@
+clean data (doing)
+
+chạy xem bao nhiêu epoch thì overfit.
+
+    36 epoch thì score lên được 0.96/1
+
+ver 1:
+    score: 0.7379
+    lr:
+        bert: 5e-6
+        classifier: 1e-3
+        epoch: 50
+        data: original
+        thêm toàn bộ data augment thì score bằng 0.7427
+
+        Nhận xét: 
+            hội tụ sau 30 epoch
+            sự khác biệt không quá lớn khi training trên data thường và data augment, dù data augment lớn hơn khá nhiều.
+
+    model 1: 72.88
+
+
+    frezze một vài tầng của bert xem thế nào? Done, không khác biệt nhiều
+
+    để num_warmup_steps lớn quá nó bị ngu 
+    bce thực sự hoạt động như thế nào??
+
+    Viết thêm điều kiện, nếu sau 10 epoch mà best score ko đổi thì dừng ko train nữa.
+
+    Xem xét xử lý data unbalance (oversampling, weight) (Doing)
+    Dùng data của a Chung để train. (Doing): ưu tiên trước, để ae vào gán nhãn, filter data những câu quá ngắn, filter những câu dài quá 512 word.
+        Gán đến câu 500 rồi.
+    Viết lại hàm loss. (Doing, ưu tiên sau)
+    Còn phải kiểm tra hiệu năng nữa????
+
+    Luồng pre process đang bị sai, cần phải sửa lại vào thống nhất data theo 1 luồng preprocess mới.
+
+
+    add thêm data để train, model ngu đi, sau 7 epoch, score còn 0.6417?????
+
+    train từ đầu với data thêm, accuracy = 0.39?????
+    không được comment trên file sh
+
+    Buổi trưa:
+        xem lại hành vi của model, tự nhiên kết quả đi xuống khá nhiều -> do gán nhãn sai, đã thảo luận với a Chung.
+        chỉ train với data của mình và của a Sơn trước xem ntn
+    Buổi chiều:
+        chuyển giao phần đóng docker cho a Chung
+
+        Chạy sau khi add thêm data tự gán nhãn, score = 0.67
+        
+
+    đưa hết code lên git, để chuyển sang máy của a Công Sơn.
+
+    check được từ 400 đến 463 rồi
+    gán đc từ 572 đến 1000 rồi.
+
+    check xem tăng bao nhiêu sample thì performance cải thiện rõ ràng.
+<<<<<<< HEAD
+    
+    
+    
+Đánh giá impact của số lương data đến performance của model:
+    train: 2k sample, score: 0.6605
+    train: 2k5 sample, score: 0.6700
+    train: all, score: 0.6979
+    
+    => Kích thước tập train ảnh hướng đến performance tập test.
+    
+    
+trong folder Data_Add:
+    labels: version đầu 
+    labels_1: version 2, sau khi Nam sửa của a Sơn 
+    labels_2: version 3, sau khi verify lại phần của a Sơn.
+=======
+
+    viết hàm chuyển label cho model mới.
+
+    
+
+CaoHaiNam/review-analysis-v1: train với data btc cho, ko sửa, model binary classification, 36 chiều: 0.465
+CaoHaiNam/review-analysis-v2: train với data đã sửa, model binary classification, 36 chiều: chưa có kết quả
+CaoHaiNam/review-analysis-based-regression: train với data đã sửa, model regression: 0.39
+
+
+
+
+
+Từ data của a Chung, lấy ra 100 câu bất kỳ.
+Lấy những câu mà data gốc với data sửa giống nhau là data test, sau đó train với phần còn lại là biết cái nào tốt hơn cái nào.
+
+Data ko sửa thì overfit được, lên đến 0.9982, còn data ko sửa thì ko overfit được, lên đc 0.98
+
+đang làm bảng thống kê trên google sheet về để so sánh model khi train trên data gốc và data sửa.
+
+đã có kết quả, chưa khẳng định được gì nhiều.
+Cần thống kê xem trong 3 file test gì gì khác nhau không (vì tỉ lễ nhãn lớp) mà lại có kết quả như vậy 
+Đưa hết các file .z thành csv => viết hàm.
+
+2 model train ngay 16-8 hiện tại đang được lưu.
+
+train joint model 
+tinh cofident co tung khia canh
+
+
+
+
+
+
+
+
+
+

@@ -1,0 +1,13 @@
+#AI library
+transformers==4.17.0
+scikit-learn==1.0.2
+torch
+
+#DATA library
+pandas==1.4.3
+numpy==1.23.1
+python-dotenv==0.20.0
+emoji
+
+#API library
+flask==2.1.3
